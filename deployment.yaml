@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-deployment
+  name: maven-deployment
   labels:
-    app: nodeapp
+    app: maven
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nodeapp
+      app: maven
   template:
     metadata:
       labels:
-        app: nodeapp 
+        app: maven
     spec:
       containers:
-      - name: nodeserver
-        image: rachana0503/project_4:latest
+      - name: mavenserver
+        image: sachinbabar17/mavenprojectt:latest
         ports:
         - containerPort: 3000
         
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeapp-service
+  name: maven-service
 spec:
   selector:
-    app: nodeport 
+    app: maven
   type: NodePort
   ports:
   - protocol: TCP
