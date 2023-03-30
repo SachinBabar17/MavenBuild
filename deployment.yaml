@@ -19,5 +19,3 @@ spec:
         image: sachinbabar17/mavenproject1
         ports:
         - containerPort: 8080
-
-kubectl expose --type=NodePort deployment mavenbuild-deployment --port 80 --name my-service --overrides '{ "apiVersion": "v1","spec":{"ports": [{"port":80,"protocol":"TCP","targetPort":8080,"nodePort":30080}]}}'
