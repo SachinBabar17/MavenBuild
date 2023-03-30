@@ -1,36 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maven-deployment2
+  name: mavenbuildproject-deployment
   labels:
-    app: maven
+    app: mavenbuild
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: maven
+      app: mavenbuild
   template:
     metadata:
       labels:
-        app: maven
+        app: mavenbuild
     spec:
       containers:
-      - name: mavenserver
-        image: sachinbabar17/mavenprojectt:latest
+      - name: mavenbuild
+        image: sachinbabar17/mavenproject1
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: maven-service
-spec:
-  selector:
-    app: maven
-  type: NodePort
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 3000
-    nodePort: 32760
+kubectl expose --type=NodePort deployment mavenbuildproject-deployment --port 80 --name my-service --overrides '{ "apiVersion": "v1","spec":{"ports": [{"port":80,"protocol":"TCP","targetPort":8080,"nodePort":30080}]}}'
